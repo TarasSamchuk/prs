@@ -1,0 +1,9 @@
+/home/kali/Desktop/prs/lab1/venv/bin/python /home/kali/Desktop/prs/lab1/facade-service/app.py 
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:8080
+Press CTRL+C to quit
+ * Serving Flask app 'app'
+ * Debug mode: off
+127.0.0.1 - - [01/Apr/2023 11:22:37] "GET /send_post HTTP/1.1" 200 -
+127.0.0.1 - - [01/Apr/2023 11:23:31] "GET /post-logs HTTP/1.1" 200 -
+127.0.0.1 - - [01/Apr/2023 11:23:41] "GET /get-message HTTP/1.1" 200 -

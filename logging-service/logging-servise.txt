@@ -1,0 +1,23 @@
+/home/kali/Desktop/prs/lab1/venv/bin/python /home/kali/Desktop/prs/lab1/logging-service/app.py 
+ * Serving Flask app 'app'
+ * Debug mode: off
+WARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.
+ * Running on http://127.0.0.1:8081
+Press CTRL+C to quit
+
+ --- post request from facade --- 
+ {'uuid': 1001, 'msg': 'msg'}
+
+127.0.0.1 - - [01/Apr/2023 11:22:37] "POST / HTTP/1.1" 200 -
+
+ --- get request from facade --- 
+
+127.0.0.1 - - [01/Apr/2023 11:22:42] "GET / HTTP/1.1" 200 -
+
+ --- get request from facade --- 
+
+127.0.0.1 - - [01/Apr/2023 11:23:31] "GET / HTTP/1.1" 200 -
+127.0.0.1 - - [01/Apr/2023 11:23:41] "GET / HTTP/1.1" 200 -
+
+ --- get request from facade --- 
+
