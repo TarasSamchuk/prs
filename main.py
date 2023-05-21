@@ -1,8 +1,9 @@
 import time
+
 import hazelcast
 from hazelcast.config import Config
 from hazelcast import HazelcastClient
-
+from threading import Thread
 def time_of_function(function):
     def wrapped(*args):
         start_time = time.perf_counter()
@@ -31,7 +32,7 @@ def add_threads():
 @time_of_function
 def pessimistic_locking():
     client = hazelcast.HazelcastClient()
-    distributed_map = client.get_map("map").blocking()
+    distributed_map = client.get_map("my-distributed-map").blocking()
 
     key = "1"
     distributed_map.put(key, 0)
@@ -67,7 +68,7 @@ def locking_maps():
 @time_of_function
 def optimistic_locking():
     client = hazelcast.HazelcastClient()
-    distributed_map = client.get_map("map").blocking()
+    distributed_map = client.get_map("my-distributed-map").blocking()
 
     key = "1"
     distributed_map.put(key, 0)
@@ -105,21 +106,37 @@ def bounded_queue():
 
     queue = client.get_queue("my-bounded-queue").get_bounded_queue(1000, fair=False)
 
+def run_app(type_lockiing):
+    thread = Thread(target=type_lockiing)
+    thread2 = Thread(target=type_lockiing)
+    thread3 = Thread(target=type_lockiing)
+
+    thread3.start()
+    thread2.start()
+    thread.start()
+    
+    print("===========================================================")
 
 if __name__ == "__main__":
     # add_threads()
     # locking_maps()
     # pessimistic_locking()
     # optimistic_locking()
-    bounded_queue()
-
+    # bounded_queue()
+    run_app(add_threads)
+    run_app(locking_maps)
+    run_app(pessimistic_locking)
+    run_app(optimistic_locking)
 # client = HazelcastClient(
+
 #     cluster_members=[
 #         "localhost:5701",
 #         "localhost:5702",
 #         "localhost:5703"
 #     ]
 # )
+#
+#
 # config = Config()
 # config.set_backup_count(2)
 #
@@ -134,3 +151,4 @@ if __name__ == "__main__":
 #     print(i)
 #
 # client.shutdown()
+
